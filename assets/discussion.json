@@ -16,7 +16,7 @@
   },
   "user": {
     "id": 44444,
-    "image_url": "44444.202141131010.jpg",
+    "image_url": "https://picky-app.s3-ap-southeast-1.amazonaws.com/users/44444.202141131010.jpg",
     "nick_name": "squad",
     "skin_type": "Oily/Resilient"
   },

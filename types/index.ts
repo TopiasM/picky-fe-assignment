@@ -3,7 +3,7 @@ interface DiscussionCategory {
   label: string;
 }
 
-interface User {
+export interface User {
   id: number;
   image_url: string;
   nick_name: string;

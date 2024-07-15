@@ -24,7 +24,8 @@ export default function RootLayout({
         <header className="fixed w-full">
           <DarkThemeToggle className="float-right m-2" />
         </header>
-        <div>
+        <br />
+        <div className="container mx-auto p-2 mt-8">
           {children}
         </div>
       </body>
