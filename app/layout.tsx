@@ -20,7 +20,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ThemeModeScript />
-        <link rel="icon" href="/images/icon-picky@3x.png" type="image/png" sizes="16x16" />
+        <link
+          rel="icon"
+          href="/images/icon-picky@3x.png"
+          type="image/png"
+          sizes="16x16"
+        />
       </head>
       <body className={"dark:bg-gray-800 " + inter.className}>
         <header className="container mx-auto flex flex-row justify-between">
@@ -29,9 +34,7 @@ export default function RootLayout({
           </Link>
           <DarkThemeToggle className="my-2" />
         </header>
-        <div className="container mx-auto p-2 dark:text-white">
-          {children}
-        </div>
+        <div className="container mx-auto p-2 dark:text-white">{children}</div>
       </body>
     </html>
   );

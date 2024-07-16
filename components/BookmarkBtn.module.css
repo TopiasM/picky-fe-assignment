@@ -1,3 +1,4 @@
 .bookmarked {
-  filter: invert(32%) sepia(50%) saturate(400%) hue-rotate(265deg) brightness(110%) contrast(104%);
+  filter: invert(32%) sepia(50%) saturate(400%) hue-rotate(265deg)
+    brightness(110%) contrast(104%);
 }

@@ -1,5 +1,5 @@
-import * as dayjs from "dayjs";
-import * as relativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 export const formatDateString = (dateStr: string): Date => new Date(dateStr);
 

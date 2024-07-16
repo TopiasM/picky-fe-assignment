@@ -10,54 +10,56 @@ import { Badge, Button, Label, Pagination, Textarea } from "flowbite-react";
 import CommentsPagination from "../../components/CommentsPagination";
 import CommentForm from "../../components/CommentForm";
 import ImagesContainer from "../../components/ImagesContainer";
+import type { Comment } from "../../types";
 
 export default async function Discussions() {
-  const discussion =  await getDiscussion()
+  const discussion = await getDiscussion();
 
   return (
     <React.Fragment>
-      <div className="flex flex-row mb-8">
-        <div className="basis-1/5 mr-8 p-4 text-gray-300 text-sm font-bold bg-gray-100 rounded-lg hidden md:flex dark:bg-gray-900">
+      <div className="mb-8 flex flex-row">
+        <div className="mr-8 hidden basis-1/5 rounded-lg bg-gray-100 p-4 text-sm font-bold text-gray-300 dark:bg-gray-900 md:flex">
           SIDEBAR MOCK
         </div>
         <div className="basis-full md:basis-4/5">
-          <Badge color="indigo" className="mb-2 w-auto inline-flex">
+          <Badge color="indigo" className="mb-2 inline-flex w-auto">
             {discussion.category.label}
           </Badge>
-          <div className="flex flex-col sm:inline-flex sm:flex-row w-full justify-between">
-            <UserContainer user={discussion.user} createdAt={discussion.createdAt} />
-            <StatsContainer 
+          <div className="flex w-full flex-col justify-between sm:inline-flex sm:flex-row">
+            <UserContainer
+              user={discussion.user}
+              createdAt={discussion.createdAt}
+            />
+            <StatsContainer
               views={discussion.viewCount}
               upvotes={discussion.upvoteCount}
               comments={discussion.commentCount}
             />
           </div>
           <div className="mt-4">
-            <h1 className="text-xl md:text-2xl font-semibold dark:text-white">
+            <h1 className="text-xl font-semibold dark:text-white md:text-2xl">
               {discussion.title}
-            </h1> 
-            <p className="mt-2 dark:text-white">
-              {discussion.content}
-            </p>
+            </h1>
+            <p className="mt-2 dark:text-white">{discussion.content}</p>
           </div>
           <div className="mt-4 inline-grid grid-flow-col gap-2">
             <ImagesContainer images={discussion.image_urls} size="lg" />
           </div>
           <br />
           <div className="mt-4 inline-flex place-items-center gap-4">
-            <Button color="light">
-              Leave a Comment
-            </Button>
-            <BookmarkBtn /> 
+            <Button color="light">Leave a Comment</Button>
+            <BookmarkBtn />
             <VoteBtns count={discussion.upvoteCount} />
           </div>
-          <hr className="h-1 mx-auto my-4 bg-gray-100 border-0 rounded dark:bg-gray-700" />
+          <hr className="mx-auto my-4 h-1 rounded border-0 bg-gray-100 dark:bg-gray-700" />
           <div>
-            <div className="flex flex-col w-full sm:flex-row justify-between mb-4 items-center">
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-0">Comments ({discussion.commentCount})</h3>
+            <div className="mb-4 flex w-full flex-col items-center justify-between sm:flex-row">
+              <h3 className="mb-2 text-lg font-semibold sm:mb-0 sm:text-xl">
+                Comments ({discussion.commentCount})
+              </h3>
               <SearchBar />
             </div>
-            <CommentsContainer comments={discussion.comments}/>
+            <CommentsContainer comments={discussion.comments} />
             <CommentsPagination />
             <CommentForm />
           </div>
@@ -68,18 +70,19 @@ export default async function Discussions() {
 }
 
 async function getDiscussion() {
-  const discussionJson = await require('/assets/discussion.json')
-  const commentsJson = await require('/assets/comments.json')
-  
+  const discussionJson = await require("/assets/discussion.json");
+  const commentsJson = await require("/assets/comments.json");
+
   return {
     ...discussionJson,
-    comments: commentsJson.map((c) => ({
-          ...c,
-          createdAt: formatDateString(c.createdAt),
-          replies: c.replies.map((r) => ({...r, createdAt: formatDateString(r.createdAt)}))
-        }
-      )
-    ),
-    createdAt: formatDateString(discussionJson.createdAt)
-  }
+    comments: commentsJson.map((c: Comment) => ({
+      ...c,
+      createdAt: formatDateString(c.createdAt.toString()),
+      replies: c.replies!.map((r) => ({
+        ...r,
+        createdAt: formatDateString(r.createdAt.toString()),
+      })),
+    })),
+    createdAt: formatDateString(discussionJson.createdAt),
+  };
 }
