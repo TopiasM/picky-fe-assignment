@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeModeScript, DarkThemeToggle } from "flowbite-react";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +20,16 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <ThemeModeScript />
+        <link rel="icon" href="/images/icon-picky@3x.png" type="image/png" sizes="16x16" />
       </head>
       <body className={"dark:bg-gray-800 " + inter.className}>
-        <header className="fixed w-full">
-          <DarkThemeToggle className="float-right m-2" />
+        <header className="container mx-auto flex flex-row justify-between">
+          <Link className="p-2 pt-4 font-bold dark:text-white" href="/">
+            Picky Assignment
+          </Link>
+          <DarkThemeToggle className="my-2" />
         </header>
-        <br />
-        <div className="container mx-auto p-2 mt-8">
+        <div className="container mx-auto p-2 dark:text-white">
           {children}
         </div>
       </body>
