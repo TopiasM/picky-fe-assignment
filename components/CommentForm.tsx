@@ -15,9 +15,9 @@ export default function CommentForm() {
   return (
     <div>
       <form className="w-full">
-        <div className="mb-2 block text-lg">
+        <div className="mb-2 block">
           <Label
-            className="font-semibold"
+            className="text-lg font-semibold"
             htmlFor="comment"
             value="Leave a comment"
           />
