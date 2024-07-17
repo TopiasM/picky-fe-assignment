@@ -9,7 +9,13 @@ const config: Config = {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        "120": "30rem",
+        "144": "36rem",
+        "192": "48rem",
+      },
+    },
   },
   plugins: [flowbite.plugin()],
 };

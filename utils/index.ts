@@ -7,3 +7,8 @@ export const dateFromNow = (date: Date): string => {
   dayjs.extend(relativeTime);
   return dayjs(date).fromNow();
 };
+
+export const scrollToComment = () => {
+  const commentBox = document.getElementById("comment-box");
+  commentBox?.scrollIntoView({ behavior: "smooth" });
+};

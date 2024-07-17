@@ -1,9 +1,10 @@
-/* eslint-disable */
+"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import commentIcon from "../public/images/icon-comment-14-px@3x.png";
 import upvoteIcon from "../public/images/icon-upvote-14-px@3x.png";
+import { useStore } from "@/store/useStore";
 
 interface StatsContainerProps {
   views: number;
@@ -24,6 +25,12 @@ interface Stat {
 }
 
 export default function StatsContainer(counts: StatsContainerProps) {
+  const [countsState, setCounts] = useState(counts);
+
+  useStore.subscribe((state) =>
+    setCounts({ ...countsState, upvotes: state.upvoteCount }),
+  );
+
   return (
     <div className="mt-2 inline-flex h-min gap-4 self-center md:mt-0">
       {stats.map(
@@ -42,7 +49,7 @@ export default function StatsContainer(counts: StatsContainerProps) {
                 </span>
               )}
               <b className="text-sm dark:text-white">
-                {counts[s.name as keyof StatsContainerProps]}
+                {countsState[s.name as keyof StatsContainerProps]}
               </b>
             </span>
           ),

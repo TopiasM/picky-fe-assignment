@@ -1,9 +1,6 @@
 import React from "react";
-import type { Comment, User } from "../types";
-import UserContainer from "./UserContainer";
-import VoteBtns from "./VoteBtns";
-import StatsContainer from "./StatsContainer";
-import ImagesContainer from "./ImagesContainer";
+import type { Comment } from "../types";
+import CommentContent from "./CommentContent";
 
 interface CommentsContainerProps {
   comments: Comment[];
@@ -27,29 +24,5 @@ export default function CommentsContainer({
         </div>
       ))}
     </div>
-  );
-}
-
-function CommentContent({ comment }: { comment: Comment }) {
-  return (
-    <React.Fragment>
-      <UserContainer
-        user={comment.user}
-        createdAt={comment.createdAt}
-        inline={true}
-      />
-      <div className="flex flex-row">
-        <p className="basis-5/6 py-2 md:basis-11/12">{comment.content}</p>
-        <div className="flex basis-1/6 items-center justify-end md:basis-1/12">
-          <VoteBtns count={comment.upvoteCount}></VoteBtns>
-        </div>
-      </div>
-      <ImagesContainer size="sm" images={comment.image_urls} />
-      <br />
-      <StatsContainer
-        views={comment.viewCount}
-        comments={comment.commentCount}
-      />
-    </React.Fragment>
   );
 }

@@ -27,7 +27,7 @@ export default function RootLayout({
           sizes="16x16"
         />
       </head>
-      <body className={"dark:bg-gray-800 " + inter.className}>
+      <body className={"min-h-screen dark:bg-gray-800 " + inter.className}>
         <header className="container mx-auto flex flex-row justify-between">
           <Link className="p-2 pt-4 font-bold dark:text-white" href="/">
             Picky Assignment
@@ -35,6 +35,9 @@ export default function RootLayout({
           <DarkThemeToggle className="my-2" />
         </header>
         <div className="container mx-auto p-2 dark:text-white">{children}</div>
+        <div className="sticky top-[100vh] flex justify-center py-4 font-medium text-gray-600">
+          © 2024 Topias Martikainen
+        </div>
       </body>
     </html>
   );

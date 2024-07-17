@@ -1,23 +1,24 @@
 import React from "react";
+import { Badge } from "flowbite-react";
 import { formatDateString } from "../../utils";
-import UserContainer from "../../components/UserContainer";
-import StatsContainer from "../../components/StatsContainer";
-import BookmarkBtn from "../../components/BookmarkBtn";
-import VoteBtns from "../../components/VoteBtns";
-import CommentsContainer from "../../components/CommentsContainer";
-import SearchBar from "../../components/SearchBar";
-import { Badge, Button, Label, Pagination, Textarea } from "flowbite-react";
-import CommentsPagination from "../../components/CommentsPagination";
-import CommentForm from "../../components/CommentForm";
-import ImagesContainer from "../../components/ImagesContainer";
 import type { Comment } from "../../types";
+import UserContainer from "@/components/UserContainer";
+import StatsContainer from "@/components/StatsContainer";
+import BookmarkBtn from "@/components/BookmarkBtn";
+import VoteBtns from "@/components/VoteBtns";
+import CommentsContainer from "@/components/CommentsContainer";
+import SearchBar from "@/components/SearchBar";
+import CommentsPagination from "@/components/CommentsPagination";
+import CommentForm from "@/components/CommentForm";
+import ImagesContainer from "@/components/ImagesContainer";
+import CommentBtn from "@/components/CommentBtn";
 
 export default async function Discussions() {
   const discussion = await getDiscussion();
 
   return (
     <React.Fragment>
-      <div className="mb-8 flex flex-row">
+      <div className="flex flex-row">
         <div className="mr-8 hidden basis-1/5 rounded-lg bg-gray-100 p-4 text-sm font-bold text-gray-300 dark:bg-gray-900 md:flex">
           SIDEBAR MOCK
         </div>
@@ -46,10 +47,14 @@ export default async function Discussions() {
             <ImagesContainer images={discussion.image_urls} size="lg" />
           </div>
           <br />
-          <div className="mt-4 inline-flex place-items-center gap-4">
-            <Button color="light">Leave a Comment</Button>
+          <div className="mt-4 flex flex-row flex-wrap place-items-center justify-start gap-4">
+            <span className="order-2 basis-full sm:order-none sm:basis-auto">
+              <CommentBtn />
+            </span>
             <BookmarkBtn />
-            <VoteBtns count={discussion.upvoteCount} />
+            <span className="order-1 sm:order-2">
+              <VoteBtns count={discussion.upvoteCount} discussion />
+            </span>
           </div>
           <hr className="mx-auto my-4 h-1 rounded border-0 bg-gray-100 dark:bg-gray-700" />
           <div>
@@ -61,7 +66,9 @@ export default async function Discussions() {
             </div>
             <CommentsContainer comments={discussion.comments} />
             <CommentsPagination />
-            <CommentForm />
+            <div className="mt-4" id="comment-box">
+              <CommentForm />
+            </div>
           </div>
         </div>
       </div>

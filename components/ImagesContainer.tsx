@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { Carousel, Modal } from "flowbite-react";
 
 interface ImagesContainerProps {
   images: string[];
@@ -19,6 +20,12 @@ export default function ImagesContainer({
 }: ImagesContainerProps) {
   const res = sizes[size];
 
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <React.Fragment>
       {images.map((url, i) => (
@@ -28,9 +35,31 @@ export default function ImagesContainer({
           src={url}
           width={res}
           height={res}
-          alt={`Image ${i + 1} of discussion`}
+          alt={`Discussion image thumbnail ${i + 1}`}
+          onClick={() => toggleModal()}
         />
       ))}
+
+      <Modal show={showModal} size="4xl" onClose={toggleModal} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="md:h-192 sm:h-144 h-120 w-auto">
+            <Carousel slide={false}>
+              {images.map((url, i) => (
+                <Image
+                  className="rounded-lg"
+                  key={`discussion-img-${i}`}
+                  src={url}
+                  width={1000}
+                  height={1000}
+                  alt={`Discussion Image ${i + 1}`}
+                  onClick={() => toggleModal()}
+                />
+              ))}
+            </Carousel>
+          </div>
+        </Modal.Body>
+      </Modal>
     </React.Fragment>
   );
 }
