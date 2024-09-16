@@ -1,4 +1,4 @@
-# Picky frontend assignment
+
 > [LIVE DEMO](https://picky-fe-assignment.vercel.app/)
 
 ### HOW TO RUN
